@@ -1,0 +1,1159 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thời Trang Nữ Cao Cấp | shopquanaothoitrang.vn</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
+  
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#fff1f2',
+              100: '#ffe4e6',
+              200: '#fecdd3',
+              500: '#f43f5e',
+              600: '#e11d48',
+              700: '#be123c',
+              dark: '#1e1b18',
+              beige: '#fcf8f5',
+              accent: '#d4a373'
+            }
+          },
+          fontFamily: {
+            sans: ['Plus Jakarta Sans', 'sans-serif'],
+            serif: ['Playfair Display', 'serif']
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    .page-section { display: none; }
+    .page-section.active { display: block; }
+    .glass-nav {
+      background: rgba(255, 255, 255, 0.94);
+      backdrop-filter: blur(12px);
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 6px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #e2e8f0;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+<body class="bg-brand-beige text-brand-dark font-sans antialiased min-h-screen flex flex-col justify-between">
+
+  <!-- Toast Notification Container -->
+  <div id="toast-container" class="fixed top-20 right-4 z-50 space-y-2 pointer-events-none"></div>
+
+  <div>
+    <!-- Announcement Bar -->
+    <div class="bg-brand-700 text-white text-xs py-2 text-center font-medium tracking-wide">
+      ✨ CHÀO MỪNG BỘ SƯU TẬP MÙA HÈ 2026 - NHẬP NGUYÊN "CHAOHE" GIẢM 15% CHO ĐƠN HÀNG ĐẦU TIÊN ✨
+    </div>
+
+    <!-- Main Navigation Header -->
+    <header class="sticky top-0 z-40 glass-nav border-b border-rose-100 shadow-sm">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-20">
+          
+          <!-- Logo -->
+          <div class="flex-shrink-0 cursor-pointer flex items-center gap-2" onclick="navigateTo('home', 'shopquanaothoitrang.vn')">
+            <span class="w-10 h-10 rounded-full bg-brand-700 text-white flex items-center justify-center font-serif text-xl font-bold shadow-md">S</span>
+            <div>
+              <span class="font-serif font-bold text-xl sm:text-2xl tracking-wider text-brand-700 block leading-none">SHOP QUẦN ÁO</span>
+              <span class="text-[9px] sm:text-[10px] uppercase tracking-widest text-gray-500 font-semibold">Thời Trang Nữ Cao Cấp</span>
+            </div>
+          </div>
+
+          <!-- Desktop Navigation Links -->
+          <nav class="hidden md:flex space-x-8 text-sm font-medium">
+            <button onclick="navigateTo('home', 'shopquanaothoitrang.vn')" id="nav-home" class="nav-btn transition-colors text-brand-600 font-semibold">Trang Chủ</button>
+            <button onclick="navigateTo('products', 'shopquanaothoitrang.vn/san-pham')" id="nav-products" class="nav-btn transition-colors hover:text-brand-600 text-gray-700">Sản Phẩm</button>
+            <button onclick="navigateTo('news', 'shopquanaothoitrang.vn/ban-tin')" id="nav-news" class="nav-btn transition-colors hover:text-brand-600 text-gray-700">Bản Tin</button>
+            <button onclick="navigateTo('contact', 'shopquanaothoitrang.vn/tu-van-lien-he')" id="nav-contact" class="nav-btn transition-colors hover:text-brand-600 text-gray-700">Tư Vấn & Liên Hệ</button>
+          </nav>
+
+          <!-- Action Icons & Auth -->
+          <div class="flex items-center space-x-3 sm:space-x-4">
+            
+            <!-- Dynamic User Profile Button -->
+            <div id="auth-nav-container" class="hidden sm:flex items-center gap-2">
+              <button onclick="navigateTo('login', 'shopquanaothoitrang.vn/dang-nhap')" class="text-sm font-medium text-gray-700 hover:text-brand-600">Đăng Nhập</button>
+              <button onclick="navigateTo('register', 'shopquanaothoitrang.vn/dang-ky')" class="bg-brand-700 text-white text-xs px-4 py-2.5 rounded-full font-medium hover:bg-brand-600 transition shadow-sm">Đăng Ký</button>
+            </div>
+
+            <!-- Cart Icon -->
+            <button onclick="toggleCart()" class="relative p-2 text-gray-700 hover:text-brand-600">
+              <i class="fas fa-shopping-bag text-xl"></i>
+              <span id="cart-badge" class="absolute top-0 right-0 bg-brand-600 text-white text-[10px] font-bold rounded-full h-4 w-4 flex items-center justify-center">0</span>
+            </button>
+
+            <!-- Mobile Menu Toggle -->
+            <button onclick="toggleMobileMenu()" class="md:hidden p-2 text-gray-700">
+              <i class="fas fa-bars text-xl"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mobile Navigation Drawer -->
+      <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-gray-200 px-4 pt-2 pb-4 space-y-2 text-sm shadow-lg">
+        <button onclick="navigateTo('home', 'shopquanaothoitrang.vn'); toggleMobileMenu()" class="block w-full text-left py-2 font-medium text-gray-700 hover:text-brand-600">Trang Chủ</button>
+        <button onclick="navigateTo('products', 'shopquanaothoitrang.vn/san-pham'); toggleMobileMenu()" class="block w-full text-left py-2 font-medium text-gray-700 hover:text-brand-600">Sản Phẩm</button>
+        <button onclick="navigateTo('news', 'shopquanaothoitrang.vn/ban-tin'); toggleMobileMenu()" class="block w-full text-left py-2 font-medium text-gray-700 hover:text-brand-600">Bản Tin</button>
+        <button onclick="navigateTo('contact', 'shopquanaothoitrang.vn/tu-van-lien-he'); toggleMobileMenu()" class="block w-full text-left py-2 font-medium text-gray-700 hover:text-brand-600">Tư Vấn & Liên Hệ</button>
+        <hr class="my-2 border-gray-100">
+        <div id="mobile-auth-container" class="flex gap-2 pt-1">
+          <button onclick="navigateTo('login', 'shopquanaothoitrang.vn/dang-nhap'); toggleMobileMenu()" class="flex-1 text-center py-2 border border-gray-300 rounded-lg font-medium text-gray-700">Đăng Nhập</button>
+          <button onclick="navigateTo('register', 'shopquanaothoitrang.vn/dang-ky'); toggleMobileMenu()" class="flex-1 text-center py-2 bg-brand-700 text-white rounded-lg font-medium">Đăng Ký</button>
+        </div>
+      </div>
+    </header>
+
+    <!-- MAIN CONTENT SECTIONS -->
+    <main>
+      
+      <!-- PAGE 1: TRANG CHỦ -->
+      <section id="page-home" class="page-section active">
+        <!-- Hero Banner -->
+        <div class="relative bg-gradient-to-r from-rose-100/70 via-rose-50 to-amber-50/50 overflow-hidden py-16 md:py-24">
+          <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center gap-12">
+            <div class="md:w-1/2 space-y-6 text-center md:text-left">
+              <span class="inline-block bg-rose-200/80 text-brand-700 text-xs uppercase px-3.5 py-1.5 rounded-full font-bold tracking-widest border border-rose-300">BST MÙA HÈ 2026</span>
+              <h1 class="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight text-gray-900">Tôn Vinh Vẻ Đẹp Thanh Lịch & Tinh Tế</h1>
+              <p class="text-gray-600 text-base sm:text-lg max-w-lg mx-auto md:mx-0">Khám phá các thiết kế thời trang nữ hiện đại, đầm xòe lụa, áo kiểu công sở và blazer sang trọng tại shopquanaothoitrang.vn.</p>
+              <div class="flex flex-col sm:flex-row justify-center md:justify-start gap-4 pt-2">
+                <button onclick="navigateTo('products', 'shopquanaothoitrang.vn/san-pham')" class="bg-brand-700 hover:bg-brand-600 text-white px-8 py-3.5 rounded-full font-medium shadow-lg hover:shadow-xl transition flex items-center justify-center gap-2">
+                  <span>Khám Phá Sản Phẩm</span>
+                  <i class="fas fa-arrow-right text-xs"></i>
+                </button>
+                <button onclick="navigateTo('contact', 'shopquanaothoitrang.vn/tu-van-lien-he')" class="border border-brand-700 text-brand-700 hover:bg-brand-50 px-8 py-3.5 rounded-full font-medium transition">Tư Vấn Phối Đồ</button>
+              </div>
+            </div>
+            <div class="md:w-1/2 flex justify-center relative">
+              <div class="relative w-72 h-96 sm:w-80 sm:h-[450px] bg-rose-200 rounded-3xl overflow-hidden shadow-2xl transform rotate-1 hover:rotate-0 transition duration-500">
+                <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&q=80&w=800" alt="Thời trang nữ" class="w-full h-full object-cover">
+                <div class="absolute bottom-4 left-4 right-4 bg-white/90 backdrop-blur-md p-3.5 rounded-2xl border border-white/40 shadow-lg flex items-center justify-between">
+                  <div>
+                    <p class="text-xs font-bold text-gray-900">Đầm Xòe Lụa Tơ Tằm</p>
+                    <p class="text-xs text-brand-700 font-bold">650.000đ</p>
+                  </div>
+                  <button onclick="openProductModal(1)" class="bg-brand-700 text-white text-xs px-3 py-1.5 rounded-xl font-medium">Xem Ngay</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Featured Categories -->
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+          <div class="text-center max-w-xl mx-auto mb-10">
+            <h2 class="font-serif text-3xl font-bold text-gray-900">Danh Mục Nổi Bật</h2>
+            <p class="text-xs text-gray-500 mt-2">Chọn lựa phong cách yêu thích của bạn</p>
+          </div>
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+            <div onclick="filterCategoryAndNavigate('dam')" class="group cursor-pointer text-center bg-white p-4 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition">
+              <div class="aspect-square rounded-xl overflow-hidden mb-3">
+                <img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&q=80&w=500" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" alt="Đầm">
+              </div>
+              <h3 class="font-semibold text-gray-800 text-sm">Đầm & Váy Dự Tiệc</h3>
+            </div>
+            <div onclick="filterCategoryAndNavigate('ao')" class="group cursor-pointer text-center bg-white p-4 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition">
+              <div class="aspect-square rounded-xl overflow-hidden mb-3">
+                <img src="https://images.unsplash.com/photo-1485968579580-b6d095142e6e?auto=format&fit=crop&q=80&w=500" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" alt="Áo Kiểu">
+              </div>
+              <h3 class="font-semibold text-gray-800 text-sm">Áo Sơ Mi & Áo Kiểu</h3>
+            </div>
+            <div onclick="filterCategoryAndNavigate('khoac')" class="group cursor-pointer text-center bg-white p-4 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition">
+              <div class="aspect-square rounded-xl overflow-hidden mb-3">
+                <img src="https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&q=80&w=500" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" alt="Áo Khoác">
+              </div>
+              <h3 class="font-semibold text-gray-800 text-sm">Áo Khoác & Blazer</h3>
+            </div>
+            <div onclick="filterCategoryAndNavigate('quan')" class="group cursor-pointer text-center bg-white p-4 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition">
+              <div class="aspect-square rounded-xl overflow-hidden mb-3">
+                <img src="https://images.unsplash.com/photo-1541099649105-f69ad21f3246?auto=format&fit=crop&q=80&w=500" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" alt="Quần & Chân Váy">
+              </div>
+              <h3 class="font-semibold text-gray-800 text-sm">Quần & Chân Váy</h3>
+            </div>
+          </div>
+        </div>
+
+        <!-- Featured Products Stream -->
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 border-t border-rose-100">
+          <div class="flex justify-between items-end mb-8">
+            <div>
+              <span class="text-xs text-brand-700 font-bold uppercase tracking-widest">Gợi Ý Cho Bạn</span>
+              <h2 class="font-serif text-2xl sm:text-3xl font-bold text-gray-900 mt-1">Sản Phẩm Bán Chạy</h2>
+            </div>
+            <button onclick="navigateTo('products', 'shopquanaothoitrang.vn/san-pham')" class="text-xs font-semibold text-brand-700 hover:underline flex items-center gap-1">
+              <span>Xem Tất Cả</span>
+              <i class="fas fa-chevron-right text-[10px]"></i>
+            </button>
+          </div>
+          <div id="home-featured-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6"></div>
+        </div>
+      </section>
+
+      <!-- PAGE 2: SẢN PHẨM -->
+      <section id="page-products" class="page-section">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+          
+          <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4 border-b border-gray-200 pb-6">
+            <div>
+              <h1 class="font-serif text-3xl font-bold text-gray-900">Tất Cả Sản Phẩm</h1>
+              <p class="text-sm text-gray-500 mt-1">Khám phá các thiết kế mới nhất tại shopquanaothoitrang.vn</p>
+            </div>
+
+            <!-- Search and Filter Bar -->
+            <div class="w-full md:w-auto flex flex-col sm:flex-row gap-3">
+              <div class="relative flex-1 sm:w-64">
+                <i class="fas fa-search absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400 text-xs"></i>
+                <input type="text" id="product-search-input" oninput="renderProducts()" placeholder="Tìm tên áo, đầm, váy..." class="w-full pl-9 pr-4 py-2 bg-white rounded-full border border-gray-300 text-xs focus:outline-none focus:ring-2 focus:ring-brand-500">
+              </div>
+              
+              <div class="flex items-center gap-2 overflow-x-auto pb-2 sm:pb-0 text-xs">
+                <button onclick="setCategoryFilter('all')" id="cat-btn-all" class="cat-filter-btn active bg-brand-700 text-white px-3.5 py-2 rounded-full font-medium whitespace-nowrap shadow-sm">Tất Cả</button>
+                <button onclick="setCategoryFilter('dam')" id="cat-btn-dam" class="cat-filter-btn bg-white border border-gray-300 text-gray-700 px-3.5 py-2 rounded-full font-medium hover:border-brand-600 whitespace-nowrap">Đầm & Váy</button>
+                <button onclick="setCategoryFilter('ao')" id="cat-btn-ao" class="cat-filter-btn bg-white border border-gray-300 text-gray-700 px-3.5 py-2 rounded-full font-medium hover:border-brand-600 whitespace-nowrap">Áo Sơ Mi</button>
+                <button onclick="setCategoryFilter('khoac')" id="cat-btn-khoac" class="cat-filter-btn bg-white border border-gray-300 text-gray-700 px-3.5 py-2 rounded-full font-medium hover:border-brand-600 whitespace-nowrap">Áo Khoác</button>
+                <button onclick="setCategoryFilter('quan')" id="cat-btn-quan" class="cat-filter-btn bg-white border border-gray-300 text-gray-700 px-3.5 py-2 rounded-full font-medium hover:border-brand-600 whitespace-nowrap">Quần & Chân Váy</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product Grid -->
+          <div id="product-catalog-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"></div>
+
+          <!-- Empty State -->
+          <div id="no-products-msg" class="hidden text-center py-16 bg-white rounded-3xl border border-dashed border-gray-300 my-8">
+            <i class="fas fa-search text-4xl text-gray-300 mb-3"></i>
+            <p class="text-gray-600 font-medium text-sm">Không tìm thấy sản phẩm nào phù hợp.</p>
+            <button onclick="resetFilters()" class="mt-3 text-xs text-brand-700 font-bold hover:underline">Đặt lại bộ lọc</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- PAGE 3: BẢN TIN -->
+      <section id="page-news" class="page-section">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+          <div class="text-center max-w-2xl mx-auto mb-12">
+            <h1 class="font-serif text-3xl font-bold text-gray-900">Bản Tin & Xu Hướng Thời Trang</h1>
+            <p class="text-gray-500 mt-2 text-sm">Cập nhật tin tức thời trang nữ mới nhất, mẹo phối đồ đỉnh cao và cách chăm sóc trang phục từ shopquanaothoitrang.vn</p>
+          </div>
+
+          <div id="news-grid" class="grid md:grid-cols-3 gap-8"></div>
+        </div>
+      </section>
+
+      <!-- PAGE 4: TƯ VẤN & LIÊN HỆ -->
+      <section id="page-contact" class="page-section">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+          <div class="grid md:grid-cols-2 gap-12">
+            
+            <!-- Left Info Column -->
+            <div class="space-y-6">
+              <div>
+                <span class="text-xs text-brand-700 font-bold uppercase tracking-widest">Hỗ Trợ Khách Hàng</span>
+                <h1 class="font-serif text-3xl font-bold text-gray-900 mt-1">Liên Hệ & Tư Vấn Size Thời Trang</h1>
+                <p class="text-gray-600 text-sm mt-3 leading-relaxed">Bạn chưa biết chọn size quần áo phù hợp? Cần tư vấn outfit đi tiệc hoặc đi làm? Đội ngũ Stylist tại **shopquanaothoitrang.vn** sẵn sàng hỗ trợ bạn ngay!</p>
+              </div>
+
+              <!-- Size Calculator Widget -->
+              <div class="bg-gradient-to-br from-rose-50 to-orange-50 p-6 rounded-2xl border border-rose-100 shadow-sm">
+                <h3 class="font-serif font-bold text-base text-gray-900 mb-3 flex items-center gap-2">
+                  <i class="fas fa-ruler-combined text-brand-700"></i>
+                  <span>Công Cụ Tính Size Tự Động</span>
+                </h3>
+                <div class="grid grid-cols-2 gap-3 mb-4">
+                  <div>
+                    <label class="block text-xs text-gray-600 mb-1">Chiều cao (cm)</label>
+                    <input type="number" id="calc-height" placeholder="160" class="w-full px-3 py-2 rounded-xl bg-white border border-gray-200 text-xs focus:outline-none focus:ring-1 focus:ring-brand-500">
+                  </div>
+                  <div>
+                    <label class="block text-xs text-gray-600 mb-1">Cân nặng (kg)</label>
+                    <input type="number" id="calc-weight" placeholder="48" class="w-full px-3 py-2 rounded-xl bg-white border border-gray-200 text-xs focus:outline-none focus:ring-1 focus:ring-brand-500">
+                  </div>
+                </div>
+                <button onclick="calculateSize()" class="w-full bg-gray-900 hover:bg-black text-white text-xs font-semibold py-2.5 rounded-xl transition">Gợi Ý Size Cho Tôi</button>
+                <div id="size-result" class="hidden mt-3 p-3 bg-emerald-50 border border-emerald-200 rounded-xl text-xs text-emerald-800 font-medium text-center"></div>
+              </div>
+
+              <div class="space-y-3 text-sm">
+                <div class="flex items-start space-x-4 p-4 bg-white rounded-xl shadow-sm border border-gray-100">
+                  <div class="bg-rose-100 text-brand-700 p-3 rounded-lg"><i class="fas fa-map-marker-alt text-lg"></i></div>
+                  <div>
+                    <h4 class="font-semibold text-gray-900">Địa chỉ showroom</h4>
+                    <p class="text-gray-500 text-xs mt-0.5">123 Đường Thời Trang, Quận 1, TP. Hồ Chí Minh</p>
+                  </div>
+                </div>
+
+                <div class="flex items-start space-x-4 p-4 bg-white rounded-xl shadow-sm border border-gray-100">
+                  <div class="bg-rose-100 text-brand-700 p-3 rounded-lg"><i class="fas fa-phone-alt text-lg"></i></div>
+                  <div>
+                    <h4 class="font-semibold text-gray-900">Hotline tư vấn 24/7</h4>
+                    <p class="text-gray-500 text-xs mt-0.5">0900 123 456 - (028) 3800 9999</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Contact Form -->
+            <div class="bg-white p-8 rounded-3xl shadow-sm border border-gray-100">
+              <h3 class="font-serif text-xl font-bold text-gray-900 mb-6">Gửi Yêu Cầu Tư Vấn Sau</h3>
+              <form onsubmit="handleContactSubmit(event)" class="space-y-4">
+                <div>
+                  <label class="block text-xs font-semibold text-gray-700 mb-1">Họ và tên</label>
+                  <input type="text" required placeholder="Nguyễn Văn A" class="w-full px-4 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500">
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                  <div>
+                    <label class="block text-xs font-semibold text-gray-700 mb-1">Số điện thoại</label>
+                    <input type="tel" required placeholder="0901234567" class="w-full px-4 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500">
+                  </div>
+                  <div>
+                    <label class="block text-xs font-semibold text-gray-700 mb-1">Dịch vụ cần hỗ trợ</label>
+                    <select class="w-full px-4 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500">
+                      <option>Tư vấn chọn size</option>
+                      <option>Tư vấn phối đồ đi tiệc</option>
+                      <option>Hỏi về giao hàng/đổi trả</option>
+                    </select>
+                  </div>
+                </div>
+                <div>
+                  <label class="block text-xs font-semibold text-gray-700 mb-1">Ghi chú thêm</label>
+                  <textarea rows="4" placeholder="Ví dụ: Mình cao 1m62 nặng 50kg muốn chọn váy dự tiệc dáng xòe..." class="w-full px-4 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500"></textarea>
+                </div>
+                <button type="submit" class="w-full bg-brand-700 hover:bg-brand-600 text-white font-medium py-3 rounded-xl shadow-md transition text-sm">Gửi Yêu Cầu Stylist</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PAGE 5: ĐĂNG NHẬP -->
+      <section id="page-login" class="page-section">
+        <div class="max-w-md mx-auto px-4 py-16">
+          <div class="bg-white p-8 rounded-3xl shadow-sm border border-gray-100 text-center">
+            <h1 class="font-serif text-2xl font-bold text-gray-900">Đăng Nhập Tài Khoản</h1>
+            <p class="text-xs text-gray-500 mt-1 mb-6">Chào mừng bạn trở lại với shopquanaothoitrang.vn</p>
+
+            <form onsubmit="handleLogin(event)" class="space-y-4 text-left">
+              <div>
+                <label class="block text-xs font-semibold text-gray-700 mb-1">Email / Số điện thoại</label>
+                <input type="text" id="login-email" required placeholder="nguyenphuong@gmail.com" class="w-full px-4 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500">
+              </div>
+              <div>
+                <div class="flex justify-between items-center mb-1">
+                  <label class="text-xs font-semibold text-gray-700">Mật khẩu</label>
+                  <a href="#" onclick="showToast('Vui lòng liên hệ Hotline 0900123456 để đặt lại mật khẩu!', 'info')" class="text-[11px] text-brand-700 hover:underline">Quên mật khẩu?</a>
+                </div>
+                <input type="password" required placeholder="••••••••" class="w-full px-4 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500">
+              </div>
+              <button type="submit" class="w-full bg-brand-700 hover:bg-brand-600 text-white font-medium py-3 rounded-xl shadow-md transition text-sm mt-2">Đăng Nhập</button>
+            </form>
+
+            <div class="mt-6 text-xs text-gray-500">
+              Chưa có tài khoản? <button onclick="navigateTo('register', 'shopquanaothoitrang.vn/dang-ky')" class="text-brand-700 font-semibold hover:underline">Đăng ký ngay</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PAGE 6: ĐĂNG KÝ -->
+      <section id="page-register" class="page-section">
+        <div class="max-w-md mx-auto px-4 py-16">
+          <div class="bg-white p-8 rounded-3xl shadow-sm border border-gray-100 text-center">
+            <h1 class="font-serif text-2xl font-bold text-gray-900">Tạo Tài Khoản Mới</h1>
+            <p class="text-xs text-gray-500 mt-1 mb-6">Trở thành thành viên để nhận ưu đãi 15% tại shopquanaothoitrang.vn</p>
+
+            <form onsubmit="handleRegister(event)" class="space-y-4 text-left">
+              <div>
+                <label class="block text-xs font-semibold text-gray-700 mb-1">Họ và tên</label>
+                <input type="text" id="reg-name" required placeholder="Nguyễn Thị Phượng" class="w-full px-4 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500">
+              </div>
+              <div>
+                <label class="block text-xs font-semibold text-gray-700 mb-1">Email</label>
+                <input type="email" id="reg-email" required placeholder="phuong@gmail.com" class="w-full px-4 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500">
+              </div>
+              <div>
+                <label class="block text-xs font-semibold text-gray-700 mb-1">Số điện thoại</label>
+                <input type="tel" required placeholder="0901234567" class="w-full px-4 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500">
+              </div>
+              <div>
+                <label class="block text-xs font-semibold text-gray-700 mb-1">Mật khẩu</label>
+                <input type="password" required placeholder="••••••••" class="w-full px-4 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500">
+              </div>
+              <button type="submit" class="w-full bg-brand-700 hover:bg-brand-600 text-white font-medium py-3 rounded-xl shadow-md transition text-sm mt-2">Đăng Ký Tài Khoản</button>
+            </form>
+
+            <div class="mt-6 text-xs text-gray-500">
+              Đã có tài khoản? <button onclick="navigateTo('login', 'shopquanaothoitrang.vn/dang-nhap')" class="text-brand-700 font-semibold hover:underline">Đăng nhập</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PAGE 7: TÀI KHOẢN KHÁCH HÀNG (TRANG PHỤ) -->
+      <section id="page-profile" class="page-section">
+        <div class="max-w-4xl mx-auto px-4 py-10">
+          <div class="bg-white rounded-3xl p-6 sm:p-8 border border-gray-100 shadow-sm mb-6 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+            <div class="flex items-center gap-4">
+              <div class="w-16 h-16 rounded-full bg-rose-100 text-brand-700 flex items-center justify-center font-bold text-2xl font-serif">
+                <span id="user-avatar-text">P</span>
+              </div>
+              <div>
+                <h2 id="profile-name-display" class="font-serif font-bold text-xl text-gray-900">Nguyễn Thị Phượng</h2>
+                <p id="profile-email-display" class="text-xs text-gray-500">phuong@gmail.com</p>
+                <span class="inline-block mt-1 bg-amber-100 text-amber-800 text-[10px] font-bold px-2 py-0.5 rounded-full">Thành Viên VIP</span>
+              </div>
+            </div>
+            <button onclick="logout()" class="text-xs border border-gray-300 hover:bg-gray-50 px-4 py-2 rounded-full text-gray-700 font-medium">Đăng Xuất</button>
+          </div>
+
+          <div class="bg-white rounded-3xl p-6 sm:p-8 border border-gray-100 shadow-sm">
+            <h3 class="font-serif font-bold text-lg text-gray-900 mb-4">Lịch Sử Đơn Hàng Tại shopquanaothoitrang.vn</h3>
+            <div id="order-history-list" class="space-y-4"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PAGE 8: THANH TOÁN (CHECKOUT) -->
+      <section id="page-checkout" class="page-section">
+        <div class="max-w-4xl mx-auto px-4 py-10">
+          <div class="mb-6 flex items-center gap-2 text-xs text-gray-500">
+            <button onclick="navigateTo('products', 'shopquanaothoitrang.vn/san-pham')" class="hover:underline">Sản Phẩm</button>
+            <i class="fas fa-chevron-right text-[10px]"></i>
+            <span class="font-semibold text-gray-900">Thanh Toán Đơn Hàng</span>
+          </div>
+
+          <div class="grid md:grid-cols-5 gap-8">
+            <div class="md:col-span-3 bg-white p-6 rounded-3xl border border-gray-100 shadow-sm space-y-4">
+              <h2 class="font-serif text-xl font-bold text-gray-900 border-b pb-3">Thông Tin Giao Hàng</h2>
+              
+              <form id="checkout-form" onsubmit="processOrder(event)" class="space-y-3">
+                <div>
+                  <label class="block text-xs font-semibold text-gray-700 mb-1">Họ và tên người nhận</label>
+                  <input type="text" id="chk-name" required placeholder="Nguyễn Văn A" class="w-full px-3.5 py-2 rounded-xl border border-gray-200 text-xs focus:outline-none focus:ring-1 focus:ring-brand-500">
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                  <div>
+                    <label class="block text-xs font-semibold text-gray-700 mb-1">Số điện thoại</label>
+                    <input type="tel" id="chk-phone" required placeholder="0901234567" class="w-full px-3.5 py-2 rounded-xl border border-gray-200 text-xs focus:outline-none focus:ring-1 focus:ring-brand-500">
+                  </div>
+                  <div>
+                    <label class="block text-xs font-semibold text-gray-700 mb-1">Tỉnh / Thành phố</label>
+                    <select id="chk-city" class="w-full px-3.5 py-2 rounded-xl border border-gray-200 text-xs focus:outline-none focus:ring-1 focus:ring-brand-500">
+                      <option>TP. Hồ Chí Minh</option>
+                      <option>Hà Nội</option>
+                      <option>Đà Nẵng</option>
+                      <option>Cần Thơ</option>
+                      <option>Tỉnh Thành Khác</option>
+                    </select>
+                  </div>
+                </div>
+                <div>
+                  <label class="block text-xs font-semibold text-gray-700 mb-1">Địa chỉ nhận hàng cụ thể</label>
+                  <input type="text" id="chk-address" required placeholder="Số nhà, tên đường, phường/xã..." class="w-full px-3.5 py-2 rounded-xl border border-gray-200 text-xs focus:outline-none focus:ring-1 focus:ring-brand-500">
+                </div>
+
+                <div class="pt-3 border-t">
+                  <label class="block text-xs font-semibold text-gray-700 mb-2">Phương thức thanh toán</label>
+                  <div class="space-y-2">
+                    <label class="flex items-center gap-3 p-3 border rounded-xl cursor-pointer hover:bg-rose-50/50">
+                      <input type="radio" name="payment" value="cod" checked onchange="togglePaymentQr(false)" class="text-brand-700">
+                      <i class="fas fa-truck text-brand-700 text-sm"></i>
+                      <span class="text-xs font-medium text-gray-800">Thanh toán khi nhận hàng (COD)</span>
+                    </label>
+                    <label class="flex items-center gap-3 p-3 border rounded-xl cursor-pointer hover:bg-rose-50/50">
+                      <input type="radio" name="payment" value="qr" onchange="togglePaymentQr(true)" class="text-brand-700">
+                      <i class="fas fa-qrcode text-brand-700 text-sm"></i>
+                      <span class="text-xs font-medium text-gray-800">Chuyển khoản Ngân Hàng / Quét Mã QR</span>
+                    </label>
+                  </div>
+                </div>
+
+                <!-- QR Payment Preview -->
+                <div id="qr-payment-box" class="hidden p-4 bg-gray-50 rounded-2xl border border-dashed border-gray-300 text-center">
+                  <p class="text-xs font-bold text-gray-800 mb-2">Quét mã QR VietQR để thanh toán</p>
+                  <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=SHOPQUANAOTHOITRANG_PAYMENT" alt="QR Code" class="w-36 h-36 mx-auto rounded-lg shadow-sm mb-2">
+                  <p class="text-[11px] text-gray-500">Ngân hàng: **MBBank** - STK: **0900123456**<br>Chủ tài khoản: **SHOP QUAN AO THOI TRANG**</p>
+                </div>
+
+                <button type="submit" class="w-full bg-brand-700 hover:bg-brand-600 text-white font-medium py-3 rounded-xl shadow-md transition text-sm mt-4">Xác Nhận Đặt Hàng</button>
+              </form>
+            </div>
+
+            <!-- Summary Right Column -->
+            <div class="md:col-span-2 space-y-4">
+              <div class="bg-white p-6 rounded-3xl border border-gray-100 shadow-sm">
+                <h3 class="font-serif text-lg font-bold text-gray-900 border-b pb-3 mb-3">Tóm Tắt Đơn Hàng</h3>
+                <div id="checkout-items-summary" class="space-y-3 max-h-60 overflow-y-auto pr-1"></div>
+                
+                <div class="mt-4 pt-3 border-t space-y-2 text-xs">
+                  <div class="flex justify-between text-gray-500">
+                    <span>Tạm tính</span>
+                    <span id="chk-subtotal">0đ</span>
+                  </div>
+                  <div class="flex justify-between text-gray-500">
+                    <span>Phí vận chuyển</span>
+                    <span class="text-emerald-600 font-medium">Miễn phí</span>
+                  </div>
+                  <div class="flex justify-between text-sm font-bold text-gray-900 pt-2 border-t">
+                    <span>Tổng cộng</span>
+                    <span id="chk-total" class="text-brand-700">0đ</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- PRODUCT QUICK VIEW MODAL -->
+  <div id="product-modal" class="fixed inset-0 bg-black/60 z-50 hidden flex items-center justify-center p-4 backdrop-blur-sm">
+    <div class="bg-white rounded-3xl max-w-2xl w-full overflow-hidden shadow-2xl flex flex-col md:flex-row relative">
+      <button onclick="closeProductModal()" class="absolute top-3 right-3 w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-gray-200 z-10"><i class="fas fa-times"></i></button>
+      <div class="md:w-1/2 aspect-[3/4] bg-gray-100">
+        <img id="modal-img" src="" alt="Detail" class="w-full h-full object-cover">
+      </div>
+      <div class="md:w-1/2 p-6 flex flex-col justify-between">
+        <div>
+          <span id="modal-category" class="text-[10px] font-bold uppercase text-brand-700 tracking-wider">THỜI TRANG NỮ</span>
+          <h2 id="modal-title" class="font-serif font-bold text-xl text-gray-900 mt-1">Tên Sản Phẩm</h2>
+          <div class="mt-2 flex items-baseline gap-2">
+            <span id="modal-price" class="text-xl font-bold text-brand-700">0đ</span>
+            <span id="modal-old-price" class="text-xs text-gray-400 line-through"></span>
+          </div>
+          <p id="modal-desc" class="text-xs text-gray-600 mt-3 leading-relaxed">Mô tả sản phẩm...</p>
+          
+          <!-- Size selection -->
+          <div class="mt-4">
+            <label class="block text-xs font-semibold text-gray-700 mb-1.5">Chọn Kích Thước (Size)</label>
+            <div class="flex gap-2">
+              <button onclick="selectSize('S')" class="size-btn w-9 h-9 rounded-lg border border-gray-300 text-xs font-medium hover:border-brand-700">S</button>
+              <button onclick="selectSize('M')" class="size-btn w-9 h-9 rounded-lg border border-gray-300 text-xs font-medium hover:border-brand-700 active border-brand-700 bg-brand-50 text-brand-700">M</button>
+              <button onclick="selectSize('L')" class="size-btn w-9 h-9 rounded-lg border border-gray-300 text-xs font-medium hover:border-brand-700">L</button>
+            </div>
+          </div>
+        </div>
+
+        <button id="modal-add-btn" onclick="" class="w-full bg-brand-700 hover:bg-brand-600 text-white font-medium py-3 rounded-xl shadow-md transition text-xs flex items-center justify-center gap-2 mt-6">
+          <i class="fas fa-shopping-bag"></i>
+          <span>Thêm Vào Giỏ Hàng</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ARTICLE READER MODAL -->
+  <div id="article-modal" class="fixed inset-0 bg-black/60 z-50 hidden flex items-center justify-center p-4 backdrop-blur-sm">
+    <div class="bg-white rounded-3xl max-w-2xl w-full max-h-[85vh] overflow-y-auto p-6 sm:p-8 relative">
+      <button onclick="closeArticleModal()" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-gray-200"><i class="fas fa-times"></i></button>
+      <span id="art-modal-tag" class="text-xs text-brand-700 font-bold uppercase tracking-wider">Xu Hướng</span>
+      <h2 id="art-modal-title" class="font-serif font-bold text-2xl text-gray-900 mt-2">Tiêu Đề Bài Viết</h2>
+      <p id="art-modal-date" class="text-xs text-gray-400 mt-1 mb-4"></p>
+      <img id="art-modal-img" src="" alt="Article" class="w-full h-56 object-cover rounded-2xl mb-4">
+      <div id="art-modal-content" class="text-xs text-gray-700 space-y-3 leading-relaxed"></div>
+    </div>
+  </div>
+
+  <!-- Cart Slide-over Drawer -->
+  <div id="cart-drawer" class="fixed inset-0 bg-black/40 z-50 hidden transition-opacity">
+    <div class="absolute right-0 top-0 bottom-0 w-full max-w-md bg-white shadow-2xl flex flex-col justify-between">
+      <div class="p-4 border-b flex justify-between items-center bg-gray-50">
+        <div class="flex items-center gap-2">
+          <i class="fas fa-shopping-bag text-brand-700"></i>
+          <h3 class="font-serif font-bold text-base text-gray-900">Giỏ Hàng Của Bạn</h3>
+        </div>
+        <button onclick="toggleCart()" class="text-gray-400 hover:text-gray-600"><i class="fas fa-times text-lg"></i></button>
+      </div>
+      
+      <div id="cart-items-container" class="p-4 flex-1 overflow-y-auto space-y-3 custom-scrollbar"></div>
+
+      <div class="p-4 border-t bg-gray-50">
+        <div class="flex justify-between font-bold text-sm mb-4">
+          <span class="text-gray-700">Tổng tiền hàng:</span>
+          <span id="cart-total-price" class="text-brand-700 text-base">0đ</span>
+        </div>
+        <button onclick="goToCheckout()" class="w-full bg-brand-700 hover:bg-brand-600 text-white py-3 rounded-xl font-medium text-xs shadow-md transition flex items-center justify-center gap-2">
+          <span>Tiến Hành Thanh Toán</span>
+          <i class="fas fa-arrow-right"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-gray-900 text-gray-300 text-xs py-12 border-t border-gray-800 mt-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-4 gap-8">
+      <div>
+        <h3 class="font-serif font-bold text-white text-lg mb-3">shopquanaothoitrang.vn</h3>
+        <p class="text-gray-400 leading-relaxed">Thương hiệu thời trang nữ cao cấp mang phong cách hiện đại, thanh lịch và quý phái.</p>
+      </div>
+      <div>
+        <h4 class="font-semibold text-white mb-3 uppercase tracking-wider">Điều Hướng Trang</h4>
+        <ul class="space-y-2">
+          <li><a href="#" onclick="navigateTo('home', 'shopquanaothoitrang.vn')" class="hover:text-white">Trang Chủ</a></li>
+          <li><a href="#" onclick="navigateTo('products', 'shopquanaothoitrang.vn/san-pham')" class="hover:text-white">Sản Phẩm</a></li>
+          <li><a href="#" onclick="navigateTo('news', 'shopquanaothoitrang.vn/ban-tin')" class="hover:text-white">Bản Tin</a></li>
+          <li><a href="#" onclick="navigateTo('contact', 'shopquanaothoitrang.vn/tu-van-lien-he')" class="hover:text-white">Tư Vấn & Liên Hệ</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-semibold text-white mb-3 uppercase tracking-wider">Chính Sách Khách Hàng</h4>
+        <ul class="space-y-2">
+          <li><a href="#" onclick="showToast('Chính sách đổi trả miễn phí trong 30 ngày!', 'info')" class="hover:text-white">Đổi Trả Trong 30 Ngày</a></li>
+          <li><a href="#" onclick="showToast('Freeship toàn quốc cho đơn trên 500k!', 'info')" class="hover:text-white">Giao Hàng Toàn Quốc</a></li>
+          <li><a href="#" onclick="showToast('Bảo mật 100% thông tin người dùng', 'info')" class="hover:text-white">Bảo Mật Thông Tin</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-semibold text-white mb-3 uppercase tracking-wider">Kết Nối Với Chúng Tôi</h4>
+        <div class="flex space-x-3 text-base">
+          <a href="#" class="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center hover:bg-brand-700 transition"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" class="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center hover:bg-brand-700 transition"><i class="fab fa-instagram"></i></a>
+          <a href="#" class="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center hover:bg-brand-700 transition"><i class="fab fa-tiktok"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="max-w-7xl mx-auto px-4 mt-8 pt-6 border-t border-gray-800 text-center text-gray-500">
+      © 2026 shopquanaothoitrang.vn. Tất cả quyền được bảo lưu.
+    </div>
+  </footer>
+
+  <!-- JAVASCRIPT APP LOGIC -->
+  <script>
+    // DATA STORES
+    const PRODUCTS = [
+      { id: 1, name: "Đầm Xòe Lụa Tơ Tằm Dáng Dài", price: 650000, oldPrice: 850000, category: "dam", tag: "Mới", img: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&q=80&w=500", desc: "Đầm xòe dáng dài chế tác từ lụa tơ tằm mềm mịn, tôn dáng sang trọng thích hợp cho các buổi tiệc và sự kiện cao cấp." },
+      { id: 2, name: "Áo Sơ Mi Lụa Cổ V Thanh Lịch", price: 380000, oldPrice: null, category: "ao", tag: "Bán chạy", img: "https://images.unsplash.com/photo-1485968579580-b6d095142e6e?auto=format&fit=crop&q=80&w=500", desc: "Áo sơ mi lụa phong cách Hàn Quốc, chất liệu thoáng mát, cổ V duyên dáng kết hợp hoàn hảo với chân váy hoặc quần tây công sở." },
+      { id: 3, name: "Áo Khoác Blazer Hàn Quốc Form Rộng", price: 520000, oldPrice: 620000, category: "khoac", tag: "Hot", img: "https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&q=80&w=500", desc: "Blazer 2 lớp dáng rộng hiện đại, chất vải tuyết mưa đứng phom, tạo nét quyền lực và cuốn hút cho quý cô công sở." },
+      { id: 4, name: "Chân Váy Bút Chị Công Sở Dáng Dài", price: 290000, oldPrice: null, category: "quan", tag: null, img: "https://images.unsplash.com/photo-1541099649105-f69ad21f3246?auto=format&fit=crop&q=80&w=500", desc: "Chân váy bút chì co giãn nhẹ, ôm dáng thanh lịch giúp đôi chân trông dài hơn, phối cùng áo sơ mi rất đẹp." },
+      { id: 5, name: "Đầm Cổ V Dún Eo Sang Trọng", price: 590000, oldPrice: 700000, category: "dam", tag: "Mới", img: "https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&q=80&w=500", desc: "Thiết kế đầm dún eo khéo léo che khuyết điểm vòng 2, chất vải đũi cao cấp thoáng nhẹ thích hợp mùa hè." },
+      { id: 6, name: "Áo Kiểu Cổ Tròn Xếp Ly Tinh Tế", price: 320000, oldPrice: null, category: "ao", tag: null, img: "https://images.unsplash.com/photo-1434389677669-e08b4cac3105?auto=format&fit=crop&q=80&w=500", desc: "Áo kiểu nhẹ nhàng với điểm nhấn xếp ly ngực tinh tế, màu kem trang nhã dễ phối đồ." },
+      { id: 7, name: "Quần Tây Ống Rộng Cạp Cao", price: 420000, oldPrice: 480000, category: "quan", tag: "Bán chạy", img: "https://images.unsplash.com/photo-1506629082955-511b1aa562c8?auto=format&fit=crop&q=80&w=500", desc: "Quần tây cạp cao ống rộnghack dáng chuẩn, chất vải lỏng mịn không nhăn." },
+      { id: 8, name: "Áo Khoác Dạ Dáng Dài Mùa Thu", price: 890000, oldPrice: 1100000, category: "khoac", tag: "Cao cấp", img: "https://images.unsplash.com/photo-1539533018447-63fcce2678e3?auto=format&fit=crop&q=80&w=500", desc: "Áo khoác dạ cao cấp chất mịn, form chuẩn châu Âu giúp bạn luôn ấm áp và thời trang." }
+    ];
+
+    const NEWS = [
+      { id: 1, title: "5 Mẫu Đầm Công Sở Thanh Lịch Không Bao Giờ Lỗi Mạch", tag: "Xu Hướng 2026", date: "24 Tháng 10, 2026", img: "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&q=80&w=600", content: "Đầm công sở luôn là tuyên ngôn thời trang của người phụ nữ hiện đại. Năm 2026, xu hướng tối giản lên ngôi với các đường cắt may dún eo tinh tế, chất liệu lụa tơ tằm mềm mại vừa mang lại cảm giác thoải mái suốt 8 tiếng làm việc vừa đảm bảo vẻ lịch sự, quý phái." },
+      { id: 2, title: "Bí Quyết Phối Đồ Với Áo Blazer Cho Quý Cô Hiện Đại", tag: "Mẹo Phối Đồ", date: "20 Tháng 10, 2026", img: "https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&q=80&w=600", content: "Blazer khoác ngoài không chỉ dành cho những cuộc họp nghiêm túc. Bạn hoàn toàn có thể kết hợp blazer form rộng cùng chân váy ngắn hoặc quần jean cạp cao cho buổi hẹn hò cuối tuần năng động mà vẫn cực kỳ sành điệu." },
+      { id: 3, title: "Cách Bảo Quản Quần Áo Lụa Tơ Tằm Luôn Mới Giữ Phom", tag: "Chăm Sóc Trang Phục", date: "15 Tháng 10, 2026", img: "https://images.unsplash.com/photo-1469334031218-e382a71b716b?auto=format&fit=crop&q=80&w=600", content: "Lụa là chất liệu tự nhiên quý giá. Khi giặt trang phục lụa tại shopquanaothoitrang.vn, bạn nên giặt nhẹ bằng tay với sữa tắm hoặc dầu gội dịu nhẹ, tránh vắt mạnh và phơi trong bóng râm để giữ màu sắc bền đẹp như mới." }
+    ];
+
+    // STATE
+    let cart = JSON.parse(localStorage.getItem('cart_items') || '[]');
+    let currentUser = JSON.parse(localStorage.getItem('current_user') || 'null');
+    let orders = JSON.parse(localStorage.getItem('user_orders') || '[]');
+    let currentCategory = 'all';
+    let selectedModalSize = 'M';
+
+    // INITIALIZATION
+    window.addEventListener('DOMContentLoaded', () => {
+      renderCart();
+      updateAuthUI();
+      renderFeaturedHome();
+      renderProducts();
+      renderNews();
+      renderOrders();
+    });
+
+    // NAVIGATION
+    function navigateTo(pageId, urlName) {
+      document.querySelectorAll('.page-section').forEach(sec => sec.classList.remove('active'));
+      const target = document.getElementById('page-' + pageId);
+      if (target) target.classList.add('active');
+
+      document.getElementById('current-url').innerText = urlName;
+
+      document.querySelectorAll('.nav-btn').forEach(btn => {
+        btn.classList.remove('text-brand-600', 'font-semibold');
+        btn.classList.add('text-gray-700');
+      });
+      const activeNav = document.getElementById('nav-' + pageId);
+      if (activeNav) {
+        activeNav.classList.add('text-brand-600', 'font-semibold');
+        activeNav.classList.remove('text-gray-700');
+      }
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function toggleMobileMenu() {
+      document.getElementById('mobile-menu').classList.toggle('hidden');
+    }
+
+    // PRODUCT RENDERING & FILTERING
+    function renderProducts() {
+      const grid = document.getElementById('product-catalog-grid');
+      const search = document.getElementById('product-search-input').value.toLowerCase();
+      
+      const filtered = PRODUCTS.filter(p => {
+        const matchesCat = currentCategory === 'all' || p.category === currentCategory;
+        const matchesSearch = p.name.toLowerCase().includes(search);
+        return matchesCat && matchesSearch;
+      });
+
+      const noMsg = document.getElementById('no-products-msg');
+      if (filtered.length === 0) {
+        grid.innerHTML = '';
+        noMsg.classList.remove('hidden');
+        return;
+      }
+      noMsg.classList.add('hidden');
+
+      grid.innerHTML = filtered.map(p => `
+        <div class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition border border-gray-100 flex flex-col justify-between">
+          <div class="relative group aspect-[3/4] overflow-hidden cursor-pointer" onclick="openProductModal(${p.id})">
+            <img src="${p.img}" alt="${p.name}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+            ${p.tag ? `<span class="absolute top-3 left-3 bg-brand-700 text-white text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider">${p.tag}</span>` : ''}
+          </div>
+          <div class="p-4 flex-1 flex flex-col justify-between">
+            <div>
+              <span class="text-[10px] text-gray-400 uppercase font-semibold tracking-wider">${getCategoryName(p.category)}</span>
+              <h3 onclick="openProductModal(${p.id})" class="font-semibold text-gray-800 text-xs mt-1 hover:text-brand-600 cursor-pointer line-clamp-2">${p.name}</h3>
+            </div>
+            <div class="mt-3 flex items-center justify-between pt-2 border-t border-gray-50">
+              <div>
+                <span class="text-brand-700 font-bold text-sm">${formatMoney(p.price)}</span>
+                ${p.oldPrice ? `<span class="text-[10px] text-gray-400 line-through ml-1">${formatMoney(p.oldPrice)}</span>` : ''}
+              </div>
+              <button onclick="addToCart(${p.id}, 'M')" class="bg-brand-50 text-brand-700 p-2 rounded-full hover:bg-brand-700 hover:text-white transition text-xs">
+                <i class="fas fa-cart-plus"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function renderFeaturedHome() {
+      const grid = document.getElementById('home-featured-grid');
+      const featured = PRODUCTS.slice(0, 4);
+      grid.innerHTML = featured.map(p => `
+        <div class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition border border-gray-100 flex flex-col justify-between">
+          <div class="relative group aspect-[3/4] overflow-hidden cursor-pointer" onclick="openProductModal(${p.id})">
+            <img src="${p.img}" alt="${p.name}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+          </div>
+          <div class="p-4">
+            <h3 onclick="openProductModal(${p.id})" class="font-semibold text-gray-800 text-xs hover:text-brand-600 cursor-pointer line-clamp-1">${p.name}</h3>
+            <div class="mt-2 flex items-center justify-between">
+              <span class="text-brand-700 font-bold text-sm">${formatMoney(p.price)}</span>
+              <button onclick="addToCart(${p.id}, 'M')" class="bg-brand-50 text-brand-700 p-2 rounded-full hover:bg-brand-700 hover:text-white transition text-xs">
+                <i class="fas fa-cart-plus"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function setCategoryFilter(cat) {
+      currentCategory = cat;
+      document.querySelectorAll('.cat-filter-btn').forEach(b => {
+        b.classList.remove('bg-brand-700', 'text-white');
+        b.classList.add('bg-white', 'text-gray-700', 'border', 'border-gray-300');
+      });
+      const activeBtn = document.getElementById('cat-btn-' + cat);
+      if (activeBtn) {
+        activeBtn.classList.add('bg-brand-700', 'text-white');
+        activeBtn.classList.remove('bg-white', 'text-gray-700');
+      }
+      renderProducts();
+    }
+
+    function filterCategoryAndNavigate(cat) {
+      setCategoryFilter(cat);
+      navigateTo('products', 'shopquanaothoitrang.vn/san-pham');
+    }
+
+    function resetFilters() {
+      document.getElementById('product-search-input').value = '';
+      setCategoryFilter('all');
+    }
+
+    // MODAL LOGIC
+    function openProductModal(id) {
+      const p = PRODUCTS.find(item => item.id === id);
+      if (!p) return;
+      
+      document.getElementById('modal-img').src = p.img;
+      document.getElementById('modal-title').innerText = p.name;
+      document.getElementById('modal-category').innerText = getCategoryName(p.category);
+      document.getElementById('modal-price').innerText = formatMoney(p.price);
+      document.getElementById('modal-old-price').innerText = p.oldPrice ? formatMoney(p.oldPrice) : '';
+      document.getElementById('modal-desc').innerText = p.desc;
+      
+      const btn = document.getElementById('modal-add-btn');
+      btn.onclick = () => {
+        addToCart(p.id, selectedModalSize);
+        closeProductModal();
+      };
+
+      document.getElementById('product-modal').classList.remove('hidden');
+    }
+
+    function closeProductModal() {
+      document.getElementById('product-modal').classList.add('hidden');
+    }
+
+    function selectSize(sz) {
+      selectedModalSize = sz;
+      document.querySelectorAll('.size-btn').forEach(b => {
+        b.classList.remove('border-brand-700', 'bg-brand-50', 'text-brand-700');
+      });
+      event.target.classList.add('border-brand-700', 'bg-brand-50', 'text-brand-700');
+    }
+
+    // CART SYSTEM
+    function toggleCart() {
+      document.getElementById('cart-drawer').classList.toggle('hidden');
+    }
+
+    function addToCart(productId, size = 'M') {
+      const p = PRODUCTS.find(item => item.id === productId);
+      if (!p) return;
+
+      const existingIndex = cart.findIndex(item => item.id === productId && item.size === size);
+      if (existingIndex > -1) {
+        cart[existingIndex].qty += 1;
+      } else {
+        cart.push({ id: p.id, name: p.name, price: p.price, img: p.img, size: size, qty: 1 });
+      }
+
+      saveCart();
+      showToast(`Đã thêm "${p.name}" (Size ${size}) vào giỏ hàng!`, 'success');
+    }
+
+    function updateCartQty(index, delta) {
+      cart[index].qty += delta;
+      if (cart[index].qty <= 0) {
+        cart.splice(index, 1);
+      }
+      saveCart();
+    }
+
+    function removeFromCart(index) {
+      cart.splice(index, 1);
+      saveCart();
+    }
+
+    function saveCart() {
+      localStorage.setItem('cart_items', JSON.stringify(cart));
+      renderCart();
+    }
+
+    function renderCart() {
+      const container = document.getElementById('cart-items-container');
+      const badge = document.getElementById('cart-badge');
+      
+      const totalQty = cart.reduce((sum, item) => sum + item.qty, 0);
+      const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+      
+      badge.innerText = totalQty;
+      document.getElementById('cart-total-price').innerText = formatMoney(totalPrice);
+
+      if (cart.length === 0) {
+        container.innerHTML = `
+          <div class="text-center py-12 text-gray-400">
+            <i class="fas fa-shopping-bag text-3xl mb-2"></i>
+            <p class="text-xs">Giỏ hàng của bạn đang trống</p>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = cart.map((item, idx) => `
+        <div class="flex items-center gap-3 pb-3 border-b border-gray-100">
+          <img src="${item.img}" class="w-14 h-16 object-cover rounded-lg" alt="${item.name}">
+          <div class="flex-1 min-w-0">
+            <h4 class="text-xs font-semibold text-gray-800 truncate">${item.name}</h4>
+            <span class="text-[10px] text-gray-400 block">Size: ${item.size}</span>
+            <span class="text-xs text-brand-700 font-bold">${formatMoney(item.price)}</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <div class="flex items-center border border-gray-200 rounded-lg">
+              <button onclick="updateCartQty(${idx}, -1)" class="px-2 py-0.5 text-xs text-gray-600 hover:bg-gray-100">-</button>
+              <span class="px-2 text-xs font-bold">${item.qty}</span>
+              <button onclick="updateCartQty(${idx}, 1)" class="px-2 py-0.5 text-xs text-gray-600 hover:bg-gray-100">+</button>
+            </div>
+            <button onclick="removeFromCart(${idx})" class="text-gray-300 hover:text-red-500 text-xs p-1"><i class="fas fa-trash"></i></button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function goToCheckout() {
+      if (cart.length === 0) {
+        showToast('Giỏ hàng trống! Vui lòng chọn sản phẩm.', 'warning');
+        return;
+      }
+      toggleCart();
+      renderCheckoutSummary();
+      navigateTo('checkout', 'shopquanaothoitrang.vn/thanh-toan');
+    }
+
+    // CHECKOUT SYSTEM
+    function renderCheckoutSummary() {
+      const summaryContainer = document.getElementById('checkout-items-summary');
+      const subtotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+
+      summaryContainer.innerHTML = cart.map(item => `
+        <div class="flex justify-between items-center text-xs">
+          <div class="flex gap-2 items-center">
+            <img src="${item.img}" class="w-10 h-12 object-cover rounded">
+            <div>
+              <p class="font-medium text-gray-800 line-clamp-1">${item.name}</p>
+              <span class="text-[10px] text-gray-400">Size ${item.size} x ${item.qty}</span>
+            </div>
+          </div>
+          <span class="font-semibold text-gray-800">${formatMoney(item.price * item.qty)}</span>
+        </div>
+      `).join('');
+
+      document.getElementById('chk-subtotal').innerText = formatMoney(subtotal);
+      document.getElementById('chk-total').innerText = formatMoney(subtotal);
+
+      if (currentUser) {
+        document.getElementById('chk-name').value = currentUser.name || '';
+      }
+    }
+
+    function togglePaymentQr(show) {
+      document.getElementById('qr-payment-box').classList.toggle('hidden', !show);
+    }
+
+    function processOrder(e) {
+      e.preventDefault();
+      if (cart.length === 0) return;
+
+      const name = document.getElementById('chk-name').value;
+      const phone = document.getElementById('chk-phone').value;
+      const address = document.getElementById('chk-address').value;
+      const total = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+
+      const newOrder = {
+        id: 'DH' + Math.floor(100000 + Math.random() * 900000),
+        date: new Date().toLocaleDateString('vi-VN'),
+        customer: name,
+        phone: phone,
+        address: address,
+        total: total,
+        items: [...cart],
+        status: 'Đang xử lý'
+      };
+
+      orders.unshift(newOrder);
+      localStorage.setItem('user_orders', JSON.stringify(orders));
+
+      // Clear cart
+      cart = [];
+      saveCart();
+
+      showToast('Đặt hàng thành công tại shopquanaothoitrang.vn!', 'success');
+      renderOrders();
+      navigateTo('profile', 'shopquanaothoitrang.vn/tai-khoan');
+    }
+
+    // USER AUTH SYSTEM
+    function handleLogin(e) {
+      e.preventDefault();
+      const email = document.getElementById('login-email').value;
+      currentUser = { name: "Nguyễn Thị Phượng", email: email };
+      localStorage.setItem('current_user', JSON.stringify(currentUser));
+      
+      updateAuthUI();
+      showToast('Đăng nhập thành công!', 'success');
+      navigateTo('profile', 'shopquanaothoitrang.vn/tai-khoan');
+    }
+
+    function handleRegister(e) {
+      e.preventDefault();
+      const name = document.getElementById('reg-name').value;
+      const email = document.getElementById('reg-email').value;
+
+      currentUser = { name: name, email: email };
+      localStorage.setItem('current_user', JSON.stringify(currentUser));
+
+      updateAuthUI();
+      showToast('Đăng ký tài khoản thành công!', 'success');
+      navigateTo('profile', 'shopquanaothoitrang.vn/tai-khoan');
+    }
+
+    function logout() {
+      currentUser = null;
+      localStorage.removeItem('current_user');
+      updateAuthUI();
+      showToast('Đã đăng xuất tài khoản.', 'info');
+      navigateTo('home', 'shopquanaothoitrang.vn');
+    }
+
+    function updateAuthUI() {
+      const authContainer = document.getElementById('auth-nav-container');
+      const mobileAuthContainer = document.getElementById('mobile-auth-container');
+
+      if (currentUser) {
+        authContainer.innerHTML = `
+          <button onclick="navigateTo('profile', 'shopquanaothoitrang.vn/tai-khoan')" class="flex items-center gap-2 bg-rose-50 border border-rose-200 text-brand-700 text-xs px-3 py-1.5 rounded-full font-medium hover:bg-rose-100 transition">
+            <i class="fas fa-user-circle"></i>
+            <span class="truncate max-w-[100px]">${currentUser.name}</span>
+          </button>
+        `;
+        mobileAuthContainer.innerHTML = `
+          <button onclick="navigateTo('profile', 'shopquanaothoitrang.vn/tai-khoan'); toggleMobileMenu()" class="w-full py-2 bg-rose-50 text-brand-700 rounded-lg text-xs font-bold text-center">Trang Tài Khoản Khách Hàng</button>
+        `;
+        document.getElementById('profile-name-display').innerText = currentUser.name;
+        document.getElementById('profile-email-display').innerText = currentUser.email;
+        document.getElementById('user-avatar-text').innerText = currentUser.name.charAt(0).toUpperCase();
+      } else {
+        authContainer.innerHTML = `
+          <button onclick="navigateTo('login', 'shopquanaothoitrang.vn/dang-nhap')" class="text-sm font-medium text-gray-700 hover:text-brand-600">Đăng Nhập</button>
+          <button onclick="navigateTo('register', 'shopquanaothoitrang.vn/dang-ky')" class="bg-brand-700 text-white text-xs px-4 py-2.5 rounded-full font-medium hover:bg-brand-600 transition shadow-sm">Đăng Ký</button>
+        `;
+        mobileAuthContainer.innerHTML = `
+          <button onclick="navigateTo('login', 'shopquanaothoitrang.vn/dang-nhap'); toggleMobileMenu()" class="flex-1 text-center py-2 border border-gray-300 rounded-lg font-medium text-gray-700 text-xs">Đăng Nhập</button>
+          <button onclick="navigateTo('register', 'shopquanaothoitrang.vn/dang-ky'); toggleMobileMenu()" class="flex-1 text-center py-2 bg-brand-700 text-white rounded-lg font-medium text-xs">Đăng Ký</button>
+        `;
+      }
+    }
+
+    function renderOrders() {
+      const container = document.getElementById('order-history-list');
+      if (orders.length === 0) {
+        container.innerHTML = `<p class="text-xs text-gray-400 text-center py-6">Bạn chưa có đơn hàng nào.</p>`;
+        return;
+      }
+
+      container.innerHTML = orders.map(ord => `
+        <div class="border border-gray-100 rounded-2xl p-4 bg-gray-50/50 space-y-2">
+          <div class="flex justify-between items-center text-xs">
+            <span class="font-bold text-gray-900">Mã đơn: ${ord.id}</span>
+            <span class="bg-emerald-100 text-emerald-800 text-[10px] font-bold px-2 py-0.5 rounded-full">${ord.status}</span>
+          </div>
+          <p class="text-[11px] text-gray-400">Ngày đặt: ${ord.date}</p>
+          <div class="py-2 border-y border-gray-100 space-y-1">
+            ${ord.items.map(i => `<p class="text-xs text-gray-700">• ${i.name} (Size ${i.size}) x ${i.qty}</p>`).join('')}
+          </div>
+          <div class="flex justify-between items-center text-xs pt-1">
+            <span class="text-gray-500">Tổng thanh toán:</span>
+            <span class="font-bold text-brand-700 text-sm">${formatMoney(ord.total)}</span>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // NEWS READER
+    function renderNews() {
+      const grid = document.getElementById('news-grid');
+      grid.innerHTML = NEWS.map(n => `
+        <article class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition border border-gray-100 flex flex-col justify-between">
+          <div>
+            <img src="${n.img}" alt="${n.title}" class="w-full h-48 object-cover">
+            <div class="p-6">
+              <span class="text-[10px] text-brand-700 font-bold uppercase tracking-wider">${n.tag}</span>
+              <h2 onclick="openArticleModal(${n.id})" class="font-serif font-bold text-lg text-gray-900 mt-1 hover:text-brand-600 cursor-pointer line-clamp-2">${n.title}</h2>
+              <p class="text-gray-600 text-xs mt-2 line-clamp-3 leading-relaxed">${n.content}</p>
+            </div>
+          </div>
+          <div class="px-6 pb-6 pt-0 flex items-center justify-between text-xs text-gray-400 border-t border-gray-50 mt-2">
+            <span>${n.date}</span>
+            <button onclick="openArticleModal(${n.id})" class="text-brand-700 font-semibold hover:underline">Đọc tiếp →</button>
+          </div>
+        </article>
+      `).join('');
+    }
+
+    function openArticleModal(id) {
+      const n = NEWS.find(item => item.id === id);
+      if (!n) return;
+      document.getElementById('art-modal-tag').innerText = n.tag;
+      document.getElementById('art-modal-title').innerText = n.title;
+      document.getElementById('art-modal-date').innerText = n.date;
+      document.getElementById('art-modal-img').src = n.img;
+      document.getElementById('art-modal-content').innerText = n.content;
+
+      document.getElementById('article-modal').classList.remove('hidden');
+    }
+
+    function closeArticleModal() {
+      document.getElementById('article-modal').classList.add('hidden');
+    }
+
+    // SIZE CALCULATOR LOGIC
+    function calculateSize() {
+      const h = parseFloat(document.getElementById('calc-height').value);
+      const w = parseFloat(document.getElementById('calc-weight').value);
+      const res = document.getElementById('size-result');
+
+      if (!h || !w) {
+        showToast('Vui lòng nhập chiều cao và cân nặng!', 'warning');
+        return;
+      }
+
+      let size = "M";
+      if (w < 47) size = "S";
+      else if (w >= 47 && w <= 54) size = "M";
+      else if (w > 54 && w <= 62) size = "L";
+      else size = "XL";
+
+      res.innerText = `Size đề xuất cho bạn là: SIZE ${size}`;
+      res.classList.remove('hidden');
+    }
+
+    function handleContactSubmit(e) {
+      e.preventDefault();
+      showToast('Cảm ơn bạn! Stylist của shopquanaothoitrang.vn sẽ gọi tư vấn trong 15 phút.', 'success');
+      e.target.reset();
+    }
+
+    // HELPER UTILS
+    function formatMoney(amount) {
+      return amount.toLocaleString('vi-VN') + 'đ';
+    }
+
+    function getCategoryName(cat) {
+      switch(cat) {
+        case 'dam': return 'Đầm & Váy';
+        case 'ao': return 'Áo Sơ Mi & Kiểu';
+        case 'khoac': return 'Áo Khoác';
+        case 'quan': return 'Quần & Chân Váy';
+        default: return 'Thời Trang Nữ';
+      }
+    }
+
+    function showToast(message, type = 'info') {
+      const container = document.getElementById('toast-container');
+      const toast = document.createElement('div');
+      
+      let bgColor = 'bg-gray-900 text-white';
+      if (type === 'success') bgColor = 'bg-emerald-600 text-white';
+      if (type === 'warning') bgColor = 'bg-amber-600 text-white';
+
+      toast.className = `${bgColor} px-4 py-3 rounded-2xl shadow-xl text-xs font-medium flex items-center gap-2 transform transition-all duration-300 pointer-events-auto`;
+      toast.innerHTML = `<i class="fas fa-info-circle"></i><span>${message}</span>`;
+
+      container.appendChild(toast);
+      setTimeout(() => {
+        toast.style.opacity = '0';
+        setTimeout(() => toast.remove(), 300);
+      }, 3000);
+    }
+  </script>
+</body>
+</html>
